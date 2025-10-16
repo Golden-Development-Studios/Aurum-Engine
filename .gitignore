@@ -1,0 +1,54 @@
+# Build folders
+/build/
+bin/
+obj/
+out/
+dist/
+lib/
+*.dll
+*.exe
+*.so
+*.dylib
+*.lib
+*.pdb
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.code-workspace
+
+# Logs & Temp
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# External / Vendor builds
+third_party/**/build/
+third_party/**/bin/
+
+# Generated Docs
+/docs/generated/
+*.pdf
+
+# Environment / Credentials
+.env
+*.key
+*.pem
+*.cert
