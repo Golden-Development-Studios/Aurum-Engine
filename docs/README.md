@@ -1,5 +1,7 @@
 ﻿# ⚙️ Aurum Framework & Aurum Engine
-### By Golden Developments
+### By Golden Developments Studios
+# Golden Developments Studios is operated by GitHub user @goldendev20.
+
 
 > “Engineered for precision. Built for scale. Forged in gold.”
 

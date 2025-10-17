@@ -1,0 +1,80 @@
+﻿# Contributing to Aurum Framework & Engine
+**By Golden Developments**
+
+Thank you for your interest in contributing to **Aurum**.  
+We welcome ideas, feedback, and improvements, but all contributions must follow these guidelines to ensure quality, security, and alignment with Golden Developments’ vision.
+
+---
+
+## 1. Code of Conduct
+
+All contributors are expected to:
+- Be **respectful and professional** in communication.
+- Avoid offensive or discriminatory language.
+- Submit code that adheres to project style, structure, and documentation standards.
+- Respect the ownership and IP of Golden Developments.
+
+---
+
+## 2. Contribution Types
+
+You may contribute via:
+
+- **Bug Reports / Issues**
+  - Clearly describe the problem.
+  - Include steps to reproduce.
+  - Provide expected vs. actual results.
+  
+- **Feature Requests**
+  - Detail the purpose, use case, and potential impact.
+  - Suggest design or implementation ideas.
+
+- **Code Contributions**
+  - Fork the repository and create a branch.
+  - Ensure your code follows C++17/20 standards.
+  - Include comments and documentation for clarity.
+  - Submit a Pull Request (PR) with a clear title and description.
+  
+- **Documentation**
+  - Fix typos or clarify explanations.
+  - Add guides, tutorials, or diagrams to improve understanding.
+
+---
+
+## 3. Pull Request Guidelines
+
+1. Fork → Branch → Commit → PR
+2. Keep PRs **focused on one topic**.
+3. Include **tests/examples** if applicable.
+4. Ensure **all builds pass** before submitting.
+5. Reference related issues in the PR description.
+
+---
+
+## 4. Review Process
+
+- All PRs will be reviewed by Golden Developments core maintainers.
+- Feedback will be constructive; changes may be requested before merging.
+- PRs may be **rejected** if they violate IP, project philosophy, or security guidelines.
+
+---
+
+## 5. License Agreement
+
+By submitting contributions:
+- You grant Golden Developments full rights to use, modify, or incorporate your contribution into the Aurum project.
+- You waive any claim to compensation or derivative rights unless a separate agreement is signed.
+
+---
+
+## 6. Tips for Effective Contributions
+
+- Read existing documentation before submitting code.
+- Test changes thoroughly.
+- Use **consistent naming, formatting, and code style**.
+- Document any new features or modules.
+
+---
+
+### Thank you for helping build Aurum —  
+*“Forged for creators who understand creation.”*
