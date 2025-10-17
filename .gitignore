@@ -24,6 +24,7 @@ compile_commands.json
 
 # IDEs & Editors
 .vscode/
+.vs
 .idea/
 *.suo
 *.user

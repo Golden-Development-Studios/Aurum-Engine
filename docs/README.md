@@ -66,3 +66,82 @@ mkdir build && cd build
 cmake ..
 cmake --build .
 Run the AurumSandbox target to verify the framework boots.
+
+---
+
+## 🧩 Repository Structure
+
+/Aurum
+│
+├── /src                # C++ source code
+│   ├── /Framework      # Aurum Framework core
+│   ├── /Engine         # Aurum Engine systems
+│   └── /Sandbox        # Testing / examples
+│
+├── /docs               # Project documentation
+│   ├── PROJECT_BRIEF.md
+│   ├── FEATURE_SPEC.md
+│   ├── FUTURE_VISION.md
+│   ├── DEVELOPER_GUIDE.md
+│   ├── ROADMAP_AND_TASKS.md
+│   └── README.md       # This file
+│
+└── CMakeLists.txt      # Build configuration
+
+---
+
+## 🌌 Vision
+
+Aurum aims to become a universal, data-driven ecosystem capable of powering:
+
+- Simulation sandboxes
+- AI & robotics experimentation
+- Game worlds with planetary-scale mechanics
+- Scientific visualization tools
+It’s built not only to create worlds — but to simulate them accurately.
+
+---
+
+## 📚 Documentation
+
+All core documentation is located in the /docs directory:
+
+PROJECT_BRIEF.md
+ – Mission, goals, structure
+FEATURE_SPEC.md
+ – System-level feature definitions
+FUTURE_VISION.md
+ – Long-term ambitions
+DEVELOPER_GUIDE.md
+ – Learning resources
+ROADMAP_AND_TASKS.md
+ – Task breakdown by phase
+
+ ---
+
+ ## 🧠 Development Philosophy
+
+“Every abstraction should justify its existence.”
+
+Aurum is about understanding and ownership.
+Each module is deliberately designed for transparency, maintainability, and extendability — even under extreme simulation loads.
+
+---
+
+## 🏷️ License
+
+All rights reserved © Golden Developments
+Usage, modification, or redistribution requires explicit permission unless otherwise stated per project.
+
+---
+
+## 🤝 Contact
+
+Golden Developments
+📧 goldendev.contact@example.com
+ (placeholder)
+🌐 https://github.com/GoldenDev20
+
+---
+
+## ✨ Aurum – Forged for those who build worlds.
