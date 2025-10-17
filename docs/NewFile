@@ -1,0 +1,201 @@
+# 🧠 Aurum Engine – Phase 1 Learning Resource Library
+
+> **Project:** Aurum Engine & Framework  
+> **Phase:** Foundation Layer (C++ / Windows Target)  
+> **Author:** Golden Developments Studios (@goldendev20)  
+> **Purpose:** Structured self-learning roadmap for engine and framework development.
+
+---
+
+## ⚙️ 1. Build System & Project Setup (CMake + C++ Toolchain)
+
+### 🎯 Objective:
+Learn to build a clean, modular, and scalable C++ environment with CMake and Git.
+
+### ✅ Tasks:
+- [ ] Install and configure **Visual Studio 2022** or **CLion / VSCode**
+- [ ] Install **CMake**
+- [ ] Setup **Git + GitHub Desktop**
+- [ ] Create a base `CMakeLists.txt` linking Framework, Engine, and Sandbox
+
+### 📘 Learning Links:
+- [CMake Official Documentation](https://cmake.org/documentation/)
+- [Learn CMake the Hard Way (GitHub)](https://github.com/ttroy50/cmake-examples)
+- [CMake Crash Course – Jonatan Hedborg (YouTube)](https://www.youtube.com/watch?v=bsXLMQ6WgIk)
+- [Visual Studio C++ Setup](https://learn.microsoft.com/en-us/cpp/build/vscpp-step-0-installation)
+- [MSVC Command Line Reference](https://learn.microsoft.com/en-us/cpp/build/reference/compiler-options)
+- [GitHub Desktop](https://desktop.github.com/)
+
+---
+
+## 🧩 2. Modern C++ Fundamentals (Memory, Threads, Architecture)
+
+### 🎯 Objective:
+Master modern C++ patterns and systems used in framework-level code.
+
+### ✅ Topics to Learn:
+- [ ] Smart pointers (`unique_ptr`, `shared_ptr`, `weak_ptr`)
+- [ ] RAII, move semantics, templates
+- [ ] Multithreading (`std::thread`, `std::mutex`, `std::future`)
+- [ ] Type safety and template metaprogramming
+
+### 📘 Learning Links:
+- [cppreference.com](https://en.cppreference.com/)
+- [Effective Modern C++ – Scott Meyers](https://www.oreilly.com/library/view/effective-modern-c/9781491908419/)
+- [Design Patterns in Modern C++ – Dmitri Nesteruk](https://www.packtpub.com/product/design-patterns-in-modern-c/9781786463593)
+- [The Cherno – C++ Series (YouTube)](https://www.youtube.com/playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT)
+
+---
+
+## 🪵 3. Logging, Configuration, and File I/O
+
+### 🎯 Objective:
+Develop the foundational systems used across the entire framework.
+
+### ✅ Subsystems to Implement:
+- [ ] Logging system with file + console output
+- [ ] Config system for `.ini` / `.json`
+- [ ] File reader/writer utilities
+
+### 📘 Learning Links:
+- [spdlog (GitHub)](https://github.com/gabime/spdlog)
+- [fmtlib (GitHub)](https://github.com/fmtlib/fmt)
+- [nlohmann/json (GitHub)](https://github.com/nlohmann/json)
+- [File I/O in C++ – The Cherno (YouTube)](https://www.youtube.com/watch?v=HxA-5Ru2Cng)
+- [JSON Tutorial using nlohmann/json](https://json.nlohmann.me/features/)
+
+---
+
+## 🔢 4. Math Foundations for Game & Simulation
+
+### 🎯 Objective:
+Learn and implement essential math structures for 3D engine development.
+
+### ✅ Topics to Learn:
+- [ ] Vectors, Matrices, Quaternions
+- [ ] Transformations, rotations, projections
+- [ ] AABB, Ray, and geometric intersections
+
+### 📘 Learning Links:
+- [3D Math Primer for Graphics and Game Development](https://www.amazon.com/Math-Primer-Graphics-Game-Development/dp/1568817231)
+- [GLM – OpenGL Mathematics Library (GitHub)](https://github.com/g-truc/glm)
+- [Game Math Explained – YouTube Playlist](https://www.youtube.com/playlist?list=PLFt_AvWsXl0ctd4dgE1F8g3uec4zKNRV0)
+- [MIT Linear Algebra Course (OCW)](https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/)
+
+---
+
+## 🪟 5. Windowing, Input & Rendering Setup
+
+### 🎯 Objective:
+Learn how to initialize and control a rendering context and window system.
+
+### ✅ Topics to Learn:
+- [ ] Create a window using Win32 or GLFW
+- [ ] Initialize DirectX 12 or Vulkan
+- [ ] Handle input events, resizing, and frame updates
+
+### 📘 Windowing & Input:
+- [GLFW Official Site](https://www.glfw.org/docs/latest/)
+- [Win32 API Tutorial (Microsoft Docs)](https://learn.microsoft.com/en-us/windows/win32/learnwin32/learn-to-program-for-windows)
+
+### 📘 DirectX 12 Path:
+- [DirectX 12 Programming Guide](https://learn.microsoft.com/en-us/windows/win32/direct3d12/directx-12-programming-guide)
+- [Brendan Galea – DirectX 12 Tutorial Series](https://www.youtube.com/playlist?list=PL4KX3oEgMZlCwE_1xZu_rB2DgA7oI4YHz)
+- [Microsoft DirectX Graphics Samples](https://github.com/microsoft/DirectX-Graphics-Samples)
+
+### 📘 Vulkan Path:
+- [Vulkan Tutorial](https://vulkan-tutorial.com/)
+- [Khronos Vulkan Registry](https://registry.khronos.org/vulkan/)
+- [Brendan Galea – Vulkan Tutorial Series](https://www.youtube.com/playlist?list=PL4KX3oEgMZlCwE_1xZu_rB2DgA7oI4YHz)
+
+---
+
+## 🧮 6. Profiling, Timing & Debugging
+
+### 🎯 Objective:
+Implement tools for performance insight and runtime stability.
+
+### ✅ Tools & Concepts:
+- [ ] High-resolution timing (QueryPerformanceCounter)
+- [ ] In-engine profiler
+- [ ] Debug macros and asserts
+
+### 📘 Learning Links:
+- [Tracy Profiler (GitHub)](https://github.com/wolfpld/tracy)
+- [Visual Studio Profiler Overview](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour)
+- [C++ High-Resolution Timers](https://learn.microsoft.com/en-us/windows/win32/sysinfo/acquiring-high-resolution-time-stamps)
+- [The Cherno – Profiling in C++](https://www.youtube.com/watch?v=xlAH4dbMVnU)
+
+---
+
+## 📦 7. Git, Version Control & Documentation
+
+### 🎯 Objective:
+Learn best practices for version control, project tracking, and documentation.
+
+### ✅ Tasks:
+- [ ] Learn branching and commit discipline
+- [ ] Setup GitHub issues and projects for task tracking
+- [ ] Document all public code headers
+- [ ] Maintain a `CHANGELOG.md`
+
+### 📘 Learning Links:
+- [GitHub Docs – Getting Started](https://docs.github.com/en/get-started/quickstart)
+- [Git Branching & Workflow Guide](https://nvie.com/posts/a-successful-git-branching-model/)
+- [Traversy Media – Git & GitHub Crash Course](https://www.youtube.com/watch?v=SWYqp7iY_Tc)
+- [Doxygen for C++ Projects](https://www.doxygen.nl/manual/index.html)
+- [Markdown Guide](https://www.markdownguide.org/)
+- [How to Document C++ Code with Doxygen (YouTube)](https://www.youtube.com/watch?v=Gd6nXwwnBHU)
+
+---
+
+## 🏗️ 8. Engine Architecture & Design Theory
+
+### 🎯 Objective:
+Understand professional engine structure and software design patterns.
+
+### 📘 Reading:
+- [Game Engine Architecture (Jason Gregory)](https://www.gameenginebook.com/)
+- [Game Programming Patterns (Robert Nystrom)](https://gameprogrammingpatterns.com/)
+- [Real-Time Rendering (4th Edition)](https://www.realtimerendering.com/)
+
+### 📺 Videos:
+- [The Cherno – Game Engine Series](https://www.youtube.com/playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT)
+- [Brendan Galea – Engine Systems](https://www.youtube.com/c/BrendanGalea)
+
+---
+
+## 🧠 9. Advanced Reading (Future Phases)
+
+### 🎯 Topics for Later Phases:
+- ECS (Entity-Component-System)
+- Data-Oriented Design
+- Multithreaded job systems
+- Simulation scalability
+
+### 📘 Resources:
+- [Data-Oriented Design (Book)](https://www.dataorienteddesign.com/dodmain/)
+- [Multithreading for Game Developers – Intel Guide](https://www.intel.com/content/www/us/en/developer/articles/technical/multithreading-for-game-developers.html)
+- [EnTT ECS (GitHub)](https://github.com/skypjack/entt)
+- [Erin Catto – Box2D & Physics](https://box2d.org/)
+
+---
+
+## 🗓️ Suggested Study Flow
+
+| Week | Focus | Goals |
+|------|--------|--------|
+| 1–2 | CMake, Git, modern C++ setup | Create working project and build system |
+| 3–4 | Logging, config, math | Build reusable core framework |
+| 5–6 | Rendering & window | Create working render loop and test app |
+| 7+ | Docs & profiling | Build professional development habits |
+
+---
+
+## 🏁 Notes
+> This document is designed to serve as your **personal learning and tracking guide** while developing the Aurum Engine.  
+> Each checkbox represents a milestone of competence.  
+> You can extend or annotate this document as your learning deepens.
+
+---
+© 2025 Golden Developments Studios – Educational & Development Resource for the **Aurum Engine Project**
