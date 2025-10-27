@@ -3,7 +3,7 @@
 # Create the static library targer
 add_library(AurumFramework STATIC
     src/Logger.cpp
-    include/Framework/Logger.hpp\
+    include/Framework/Logger.hpp
 )
 
 # Specify include directories for this target
