@@ -1,16 +1,16 @@
 // main.cpp
 
-#include <iostream>
+#include <Framework/Logger.hpp>
 
-int main(int argc, char** argv)
+int main()
 {
-    std::cout << "Aurum Sandbox starting up..." << std::endl;
+    using namespace Aurum;
 
-    // Initialize your engine
-    // Example:
-    // Aurum::Engine engine;
-    // engine.Initialize();
-    // engine.Run();
+    Logger::Get().SetLogFile("AurumLog.txt");
+    Logger::Get().Log("Aurum Framework initialized.", LogLevel::Info);
+    Logger::Get().Log("This is a warning test.", LogLevel::Warning);
+    Logger::Get().Log("This is an error message.", LogLevel::Error);
+    Logger::Get().Log("Debug message here.", LogLevel::Debug);
 
     return 0;
 }
