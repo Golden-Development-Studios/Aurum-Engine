@@ -4,8 +4,10 @@
 add_library(AurumFramework STATIC
     src/Logger.cpp
     src/Config.cpp
+    src/Timer.cpp
     include/Framework/Logger.hpp
     include/Framework/Config.hpp
+    include/Framework/Timer.hpp
 )
 
 # Specify include directories for this target
