@@ -15,11 +15,11 @@ jobs:
       - name: Add issue to Bug Tracker project
         uses: actions/add-to-project@v1
         with:
-          project-url: https://github.com/orgs/AurumEngineOrg/projects/4
+          project-url: https://github.com/orgs/Golden-Development-Studios/projects/4
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add issue to Core Development project
         uses: actions/add-to-project@v1
         with:
-          project-url: https://github.com/orgs/AurumEngineOrg/projects/5
+          project-url: https://github.com/orgs/Golden-Development-Studios/projects/5
           github-token: ${{ secrets.GITHUB_TOKEN }}
