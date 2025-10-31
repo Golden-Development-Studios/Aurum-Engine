@@ -1,0 +1,14 @@
+name: "💬 Question or Discussion"
+description: "Ask a question or start a design discussion."
+title: "[Question] <Short Topic>"
+labels:
+  - "Type - Discussion"
+
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "Your Question / Discussion Topic"
+      placeholder: "Example: How will the ECS system handle component serialization?"
+    validations:
+      required: true

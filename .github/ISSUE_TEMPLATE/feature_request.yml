@@ -1,0 +1,44 @@
+name: "✨ Feature Request"
+description: "Suggest a new feature or improvement for Aurum Engine."
+title: "[Feature] <Your Idea>"
+labels:
+  - "Type - Feature"
+  - "Priority - Medium"
+
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: "System or Area"
+      options:
+        - Area - Core
+        - Area - Rendering
+        - Area - Physics
+        - Area - Audio
+        - Area - Editor
+        - Area - Scripting
+        - Area - Networking
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: "Describe the Feature"
+      placeholder: "Describe the new functionality or system."
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "Motivation / Problem"
+      description: "Why is this feature needed or useful?"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional Details"
+      description: "Any design notes, references, or mockups."

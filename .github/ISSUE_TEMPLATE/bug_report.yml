@@ -1,0 +1,56 @@
+name: "🐞 Bug Report"
+description: "Report a problem, crash, or unexpected behavior in Aurum Engine."
+title: "[BUG] <Short Summary>"
+labels:
+  - "Type - Bug"
+  - "Priority - Medium"
+
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Affected System"
+      description: "Which system does this bug affect?"
+      options:
+        - Area - Core
+        - Area - Rendering
+        - Area - Physics
+        - Area - Audio
+        - Area - Input
+        - Area - Editor
+        - Area - Networking
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Describe the Bug"
+      description: "Explain what happened and what you expected instead."
+      placeholder: "Example: When running Scene A, audio cuts out when physics step runs."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "List the steps that reproduce the issue."
+      placeholder: "1. Launch engine\n2. Load example scene\n3. Observe crash"
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: "Aurum Engine Version"
+      description: "Enter the version or build where you found this issue."
+      placeholder: "v0.6.2"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Relevant Logs or Screenshots"
+      render: shell

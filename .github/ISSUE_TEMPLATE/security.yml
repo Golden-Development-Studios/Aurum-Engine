@@ -1,0 +1,20 @@
+name: "🔒 Security Report"
+description: "Report a security vulnerability or exploit privately."
+title: "[Security] <Brief Summary>"
+labels:
+  - "Type - Security"
+  - "Priority - Critical"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **Do not disclose sensitive information publicly!**
+        For serious vulnerabilities, contact us directly:
+        [security@aurumengine.org]
+  - type: textarea
+    id: details
+    attributes:
+      label: "Describe the vulnerability"
+      placeholder: "Explain what you found and how it could be exploited."
+    validations:
+      required: true
