@@ -13,13 +13,13 @@ jobs:
 
     steps:
       - name: Add issue to Bug Tracker project
-        uses: actions/add-to-project@v1
+        uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/Golden-Development-Studios/projects/4
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add issue to Core Development project
-        uses: actions/add-to-project@v1
+        uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/Golden-Development-Studios/projects/5
           github-token: ${{ secrets.GITHUB_TOKEN }}
