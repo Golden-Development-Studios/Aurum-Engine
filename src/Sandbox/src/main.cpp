@@ -1,26 +1,24 @@
 #include <Framework/Logger.hpp>
-#include <Framework/MemoryTracker.hpp>
-#include <Framework/Timer.hpp>
-#include <thread>
+#include <Framework/Math/Vector3.hpp>
+
+using namespace Aurum;
 
 int main()
 {
-    using namespace Aurum;
-
     Logger::Get().SetLogFile("AurumLog.txt");
-    Logger::Get().Log("=== Aurum Memory Tracker Test ===", LogLevel::Info);
+    Logger::Get().Log("=== Aurum Math Library Test ===", LogLevel::Info);
 
-    {
-        ScopedTimer scoped("Allocation Block");
-        int* a = AURUM_NEW(int, 42);
-        double* b = AURUM_NEW(double, 3.14159);
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        AURUM_DELETE(a);
-        AURUM_DELETE(b);
-    }
+    Vector3 a(1.0f, 2.0f, 3.0f);
+    Vector3 b(4.0f, 5.0f, 6.0f);
 
-    MemoryTracker::Get().Report();
+    Vector3 sum = a + b;
+    Vector3 cross = Vector3::Cross(a, b);
+    float dot = Vector3::Dot(a, b);
 
-    Logger::Get().Log("=== Memory Tracker Test Complete ===", LogLevel::Info);
+    Logger::Get().Log("a + b = " + sum.ToString());
+    Logger::Get().Log("Dot(a, b) = " + std::to_string(dot));
+    Logger::Get().Log("Cross(a, b) = " + cross.ToString());
+
+    Logger::Get().Log("=== Math Library Test Complete ===", LogLevel::Info);
     return 0;
 }
