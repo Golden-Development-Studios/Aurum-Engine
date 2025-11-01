@@ -12,7 +12,7 @@ target_include_directories(AurumEngine
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Engine/DirectX-Headers/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/External/AgilitySDK/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/External/AgilitySDK/directx
 )
 
 # --- Link Libraries ---
