@@ -1,1 +1,2 @@
-1.618.2
+Microsoft.Direct3D.D3D12 1.618.2 (Agility SDK)
+Integrated into Aurum Engine - Oct 2025
