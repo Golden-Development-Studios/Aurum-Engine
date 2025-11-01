@@ -97,23 +97,53 @@ namespace Aurum
             rtvDescriptorSize_
         );
 
-        commandList_->ResourceBarrier(
-            1,
-            &CD3DX12_RESOURCE_BARRIER::Transition(
-                renderTargets_[frameIndex_].Get(),
-                D3D12_RESOURCE_STATE_PRESENT,
-                D3D12_RESOURCE_STATE_RENDER_TARGET)
-        );
+// --- Transition to render target ---
+{
+    CD3DX12_RESOURCE_BARRIER barrier =
+        CD3DX12_RESOURCE_BARRIER::Transition(
+            renderTargets_[frameIndex_].Get(),
+            D3D12_RESOURCE_STATE_PRESENT,
+            D3D12_RESOURCE_STATE_RENDER_TARGET);
+
+    commandList_->ResourceBarrier(1, &barrier);
+}
+
+// --- Transition back to present ---
+{
+    CD3DX12_RESOURCE_BARRIER barrier =
+        CD3DX12_RESOURCE_BARRIER::Transition(
+            renderTargets_[frameIndex_].Get(),
+            D3D12_RESOURCE_STATE_RENDER_TARGET,
+            D3D12_RESOURCE_STATE_PRESENT);
+
+    commandList_->ResourceBarrier(1, &barrier);
+}
+
 
         commandList_->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 
-        commandList_->ResourceBarrier(
-            1,
-            &CD3DX12_RESOURCE_BARRIER::Transition(
-                renderTargets_[frameIndex_].Get(),
-                D3D12_RESOURCE_STATE_RENDER_TARGET,
-                D3D12_RESOURCE_STATE_PRESENT)
-        );
+// --- Transition to render target ---
+{
+    CD3DX12_RESOURCE_BARRIER barrier =
+        CD3DX12_RESOURCE_BARRIER::Transition(
+            renderTargets_[frameIndex_].Get(),
+            D3D12_RESOURCE_STATE_PRESENT,
+            D3D12_RESOURCE_STATE_RENDER_TARGET);
+
+    commandList_->ResourceBarrier(1, &barrier);
+}
+
+// --- Transition back to present ---
+{
+    CD3DX12_RESOURCE_BARRIER barrier =
+        CD3DX12_RESOURCE_BARRIER::Transition(
+            renderTargets_[frameIndex_].Get(),
+            D3D12_RESOURCE_STATE_RENDER_TARGET,
+            D3D12_RESOURCE_STATE_PRESENT);
+
+    commandList_->ResourceBarrier(1, &barrier);
+}
+
 
         commandList_->Close();
 
