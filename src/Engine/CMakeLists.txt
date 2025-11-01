@@ -1,8 +1,10 @@
-# --- Engine Module ---
+# --- Aurum Engine Module ---
 
 add_library(AurumEngine STATIC
-    src/EngineCore.cpp
-    include/Engine/EngineCore.hpp
+    src/Renderer.cpp
+    src/Window.cpp
+    include/Engine/Renderer.hpp
+    include/Engine/Window.hpp
 )
 
 target_include_directories(AurumEngine
@@ -10,7 +12,7 @@ target_include_directories(AurumEngine
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-# Link against the Framework
+# Link to the Framework
 target_link_libraries(AurumEngine
     PUBLIC
         AurumFramework
