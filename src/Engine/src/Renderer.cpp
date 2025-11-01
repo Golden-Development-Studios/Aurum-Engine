@@ -2,7 +2,7 @@
 // Includes DirectX helper structures and correct DX12 setup
 
 #include <Engine/Renderer.hpp>
-#include "directx/d3dx12.h"
+#include <directx/d3dx12.h>   // use angle brackets for consistency with your include paths
 
 namespace Aurum
 {
@@ -17,6 +17,7 @@ namespace Aurum
         WaitForGPU();
         if (fenceEvent_)
             CloseHandle(fenceEvent_);
+
         Logger::Get().Log("Renderer shutdown complete.", LogLevel::Info);
     }
 
@@ -87,66 +88,48 @@ namespace Aurum
 
     void Renderer::Clear(float r, float g, float b)
     {
+        // Reset for this frame
         commandAllocator_->Reset();
         commandList_->Reset(commandAllocator_.Get(), nullptr);
 
-        FLOAT clearColor[] = { r, g, b, 1.0f };
+        // RTV handle for current back buffer
         CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(
             rtvHeap_->GetCPUDescriptorHandleForHeapStart(),
             frameIndex_,
             rtvDescriptorSize_
         );
 
-// --- Transition to render target ---
-{
-    CD3DX12_RESOURCE_BARRIER barrier =
-        CD3DX12_RESOURCE_BARRIER::Transition(
-            renderTargets_[frameIndex_].Get(),
-            D3D12_RESOURCE_STATE_PRESENT,
-            D3D12_RESOURCE_STATE_RENDER_TARGET);
+        // --- Transition: PRESENT → RENDER_TARGET ---
+        {
+            CD3DX12_RESOURCE_BARRIER toRT =
+                CD3DX12_RESOURCE_BARRIER::Transition(
+                    renderTargets_[frameIndex_].Get(),
+                    D3D12_RESOURCE_STATE_PRESENT,
+                    D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-    commandList_->ResourceBarrier(1, &barrier);
-}
+            commandList_->ResourceBarrier(1, &toRT);
+        }
 
-// --- Transition back to present ---
-{
-    CD3DX12_RESOURCE_BARRIER barrier =
-        CD3DX12_RESOURCE_BARRIER::Transition(
-            renderTargets_[frameIndex_].Get(),
-            D3D12_RESOURCE_STATE_RENDER_TARGET,
-            D3D12_RESOURCE_STATE_PRESENT);
+        // Bind RTV before clearing
+        commandList_->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
 
-    commandList_->ResourceBarrier(1, &barrier);
-}
-
-
+        // Clear to desired color
+        const FLOAT clearColor[] = { r, g, b, 1.0f };
         commandList_->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 
-// --- Transition to render target ---
-{
-    CD3DX12_RESOURCE_BARRIER barrier =
-        CD3DX12_RESOURCE_BARRIER::Transition(
-            renderTargets_[frameIndex_].Get(),
-            D3D12_RESOURCE_STATE_PRESENT,
-            D3D12_RESOURCE_STATE_RENDER_TARGET);
+        // --- Transition: RENDER_TARGET → PRESENT ---
+        {
+            CD3DX12_RESOURCE_BARRIER toPresent =
+                CD3DX12_RESOURCE_BARRIER::Transition(
+                    renderTargets_[frameIndex_].Get(),
+                    D3D12_RESOURCE_STATE_RENDER_TARGET,
+                    D3D12_RESOURCE_STATE_PRESENT);
 
-    commandList_->ResourceBarrier(1, &barrier);
-}
+            commandList_->ResourceBarrier(1, &toPresent);
+        }
 
-// --- Transition back to present ---
-{
-    CD3DX12_RESOURCE_BARRIER barrier =
-        CD3DX12_RESOURCE_BARRIER::Transition(
-            renderTargets_[frameIndex_].Get(),
-            D3D12_RESOURCE_STATE_RENDER_TARGET,
-            D3D12_RESOURCE_STATE_PRESENT);
-
-    commandList_->ResourceBarrier(1, &barrier);
-}
-
-
+        // Execute
         commandList_->Close();
-
         ID3D12CommandList* lists[] = { commandList_.Get() };
         commandQueue_->ExecuteCommandLists(_countof(lists), lists);
     }
