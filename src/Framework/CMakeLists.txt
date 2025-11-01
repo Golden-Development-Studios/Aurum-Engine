@@ -18,6 +18,11 @@ target_include_directories(AurumFramework
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
+target_sources(AurumFramework PRIVATE
+    include/Framework/Math/Vector3.hpp
+)
+
+
 # Optional: Set Compiler warning
 target_compile_features(AurumFramework PUBLIC cxx_std_20)
 
