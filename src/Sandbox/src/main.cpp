@@ -12,7 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
     bool running = true;
     while (running && window.ProcessMessages())
     {
-        renderer.Clear(0.1f, 0.1f, 0.3f);
+        renderer.Clear(0.0f, 0.4f, 0.0f);
         renderer.Present();
     }
 
