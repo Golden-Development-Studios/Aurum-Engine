@@ -10,6 +10,10 @@
 
 #include <windows.h>
 #include <Engine/Window.hpp>
+#include <Engine/Application.hpp>
+#include <Engine/Input.hpp>
+#include <Engine/Event.hpp>
+#include <Framework/Logger.hpp>  // Assuming you have a logger utility
 
 namespace Aurum
 {
@@ -49,6 +53,10 @@ namespace Aurum
             return;
         }
 
+        // Store a pointer to the application instance for message forwarding
+        // You can later set this externally using SetWindowLongPtr.
+        // Typically: SetWindowLongPtr(hwnd_, GWLP_USERDATA, (LONG_PTR)&Application::Get());
+
         ShowWindow(hwnd_, SW_SHOW);
         UpdateWindow(hwnd_);
         Logger::Get().Log("Window created successfully.", LogLevel::Info);
@@ -75,15 +83,32 @@ namespace Aurum
         return true;
     }
 
+    // ------------------------------------------------------------
+    // Unified WindowProc - integrates input + event forwarding
+    // ------------------------------------------------------------
     LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
+        // Attempt to retrieve Application instance (set via SetWindowLongPtr)
+        Application* app = reinterpret_cast<Application*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+
+        if (app)
+        {
+            // Forward input to the InputManager for centralized handling
+            app->GetInputManager().ProcessMessage(msg, wParam, lParam);
+        }
+
         switch (msg)
         {
-        case WM_DESTROY:
-            PostQuitMessage(0);
-            return 0;
-        default:
-            return DefWindowProcW(hwnd, msg, wParam, lParam);
+            case WM_CLOSE:
+                PostQuitMessage(0);
+                return 0;
+
+            case WM_DESTROY:
+                PostQuitMessage(0);
+                return 0;
+
+            default:
+                return DefWindowProcW(hwnd, msg, wParam, lParam);
         }
     }
 }

@@ -4,7 +4,8 @@
 namespace Aurum
 {
     Application::Application(HINSTANCE hInstance)
-        : hInstance_(hInstance)
+        : hInstance_(hInstance),
+          input_(eventDispatcher_) // ✅ Integrate InputManager initialization
     {
     }
 
@@ -19,6 +20,9 @@ namespace Aurum
 
         window_ = std::make_unique<Window>(hInstance_, 1280, 720, L"Aurum Sandbox");
         renderer_ = std::make_unique<Renderer>(window_->GetHandle());
+
+        // ✅ Attach this Application instance to the window for message forwarding
+        SetWindowLongPtr(window_->GetHandle(), GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 
         // Example: publish a window resize event (simulated)
         eventDispatcher_.Publish(WindowResizeEvent(1280, 720));
@@ -47,18 +51,20 @@ namespace Aurum
 
         while (running_)
         {
+            // Process Win32 messages (returns false if WM_QUIT received)
             if (!window_->ProcessMessages())
             {
                 running_ = false;
                 break;
             }
 
-            timer_.Tick();
+            // Update delta time
             double deltaTime = timer_.Tick();
 
-            OnUpdate(deltaTime);
+            // User-defined update callback
+            OnUpdate(static_cast<float>(deltaTime));
 
-            // Clear with a calm blue background for now
+            // Example: Rendering workflow
             renderer_->Clear(0.05f, 0.05f, 0.25f);
             renderer_->Present();
         }

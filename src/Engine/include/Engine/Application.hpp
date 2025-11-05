@@ -6,7 +6,7 @@
 #include <Engine/Window.hpp>
 #include <Engine/Renderer.hpp>
 #include <Engine/EventDispatcher.hpp>
-
+#include <Engine/Input.hpp>
 
 namespace Aurum
 {
@@ -17,9 +17,13 @@ namespace Aurum
         virtual ~Application();
 
         void Run();
-        EventDispatcher& GetEventDispatcher() { return eventDispatcher_; }  // ✅ add this
+
+        // Accessors
+        EventDispatcher& GetEventDispatcher() { return eventDispatcher_; }
+        InputManager& GetInputManager() { return input_; }
 
     protected:
+        // Lifecycle methods for derived applications
         virtual void OnInitialize() {}
         virtual void OnUpdate(float deltaTime) {}
         virtual void OnShutdown() {}
@@ -32,10 +36,10 @@ namespace Aurum
         std::unique_ptr<Renderer> renderer_;
 
         EventDispatcher eventDispatcher_;
-        Aurum::FrameTimer timer_;
+        InputManager input_{ eventDispatcher_ };  // ✅ integrated InputManager tied to EventDispatcher
+        FrameTimer timer_;
 
         void Initialize();
         void Shutdown();
     };
 }
-

@@ -17,7 +17,9 @@ protected:
         // ✅ Access dispatcher through Application getter
         auto& dispatcher = GetEventDispatcher();
 
-        // Subscribe to window resize event
+        // --------------------------------------------
+        // Subscribe to window events
+        // --------------------------------------------
         dispatcher.Subscribe<Aurum::WindowResizeEvent>(
             [](const Aurum::WindowResizeEvent& e)
             {
@@ -25,7 +27,26 @@ protected:
             }
         );
 
-        // Simulate event publication (for test)
+        // --------------------------------------------
+        // Subscribe to keyboard events
+        // --------------------------------------------
+        dispatcher.Subscribe<Aurum::KeyPressedEvent>(
+            [](const Aurum::KeyPressedEvent& e)
+            {
+                Aurum::Logger::Get().Log(e.ToString(), Aurum::LogLevel::Info);
+            }
+        );
+
+        dispatcher.Subscribe<Aurum::KeyReleasedEvent>(
+            [](const Aurum::KeyReleasedEvent& e)
+            {
+                Aurum::Logger::Get().Log(e.ToString(), Aurum::LogLevel::Info);
+            }
+        );
+
+        // --------------------------------------------
+        // Simulate event publication (for testing)
+        // --------------------------------------------
         dispatcher.Publish(Aurum::WindowResizeEvent(1920, 1080));
     }
 
