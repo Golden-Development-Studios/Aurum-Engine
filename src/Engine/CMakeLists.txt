@@ -7,7 +7,8 @@ add_library(AurumEngine STATIC
     src/Application.cpp
     src/Event.cpp
     src/EventDispatcher.cpp
-    src/Input.cpp            
+    src/Input.cpp
+    src/TimeSystem.cpp
 
     # --- Header Files ---
     include/Engine/Renderer.hpp
@@ -15,8 +16,9 @@ add_library(AurumEngine STATIC
     include/Engine/Application.hpp
     include/Engine/Event.hpp
     include/Engine/EventDispatcher.hpp
-    include/Engine/Input.hpp           
-    include/Engine/InputCodes.hpp       
+    include/Engine/Input.hpp
+    include/Engine/InputCodes.hpp
+    include/Engine/TimeSystem.hpp
 )
 
 # --- Include Directories ---
