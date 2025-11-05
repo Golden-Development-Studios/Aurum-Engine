@@ -1,6 +1,8 @@
 #include <Windows.h>
 #include <iostream>
 #include <Engine/Application.hpp>
+#include <Engine/EventDispatcher.hpp>
+#include <Engine/Event.hpp>
 
 class SandboxApp : public Aurum::Application
 {
@@ -11,6 +13,20 @@ protected:
     void OnInitialize() override
     {
         Aurum::Logger::Get().Log("SandboxApp initialized.", Aurum::LogLevel::Info);
+
+        // ✅ Access dispatcher through Application getter
+        auto& dispatcher = GetEventDispatcher();
+
+        // Subscribe to window resize event
+        dispatcher.Subscribe<Aurum::WindowResizeEvent>(
+            [](const Aurum::WindowResizeEvent& e)
+            {
+                Aurum::Logger::Get().Log("Received event: " + e.ToString(), Aurum::LogLevel::Info);
+            }
+        );
+
+        // Simulate event publication (for test)
+        dispatcher.Publish(Aurum::WindowResizeEvent(1920, 1080));
     }
 
     void OnUpdate(float dt) override

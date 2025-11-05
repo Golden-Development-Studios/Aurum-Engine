@@ -4,9 +4,13 @@ add_library(AurumEngine STATIC
     src/Renderer.cpp
     src/Window.cpp
     src/Application.cpp
+    src/Event.cpp
+    src/EventDispatcher.cpp
     include/Engine/Renderer.hpp
     include/Engine/Window.hpp
     include/Engine/Application.hpp
+    include/Engine/Event.hpp
+    include/Engine/EventDispatcher.hpp
 )
 
 # --- Include Directories ---

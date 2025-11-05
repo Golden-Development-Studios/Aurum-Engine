@@ -1,4 +1,5 @@
 #include <Engine/Application.hpp>
+#include <Engine/Event.hpp>
 
 namespace Aurum
 {
@@ -18,6 +19,9 @@ namespace Aurum
 
         window_ = std::make_unique<Window>(hInstance_, 1280, 720, L"Aurum Sandbox");
         renderer_ = std::make_unique<Renderer>(window_->GetHandle());
+
+        // Example: publish a window resize event (simulated)
+        eventDispatcher_.Publish(WindowResizeEvent(1280, 720));
 
         OnInitialize();
     }

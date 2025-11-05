@@ -5,6 +5,8 @@
 #include <Framework/Timer.hpp>
 #include <Engine/Window.hpp>
 #include <Engine/Renderer.hpp>
+#include <Engine/EventDispatcher.hpp>
+
 
 namespace Aurum
 {
@@ -15,6 +17,7 @@ namespace Aurum
         virtual ~Application();
 
         void Run();
+        EventDispatcher& GetEventDispatcher() { return eventDispatcher_; }  // ✅ add this
 
     protected:
         virtual void OnInitialize() {}
@@ -28,7 +31,8 @@ namespace Aurum
         std::unique_ptr<Window> window_;
         std::unique_ptr<Renderer> renderer_;
 
-        Aurum::FrameTimer timer_;  // ✅ Correct type and namespace
+        EventDispatcher eventDispatcher_;
+        Aurum::FrameTimer timer_;
 
         void Initialize();
         void Shutdown();
