@@ -7,6 +7,7 @@ namespace Aurum
         : hInstance_(hInstance),
           input_(eventDispatcher_) // ✅ Integrate InputManager initialization
     {
+        timeSystem_.Initialize(60.0); // Target 60 FPS Cap
     }
 
     Application::~Application()
@@ -51,22 +52,27 @@ namespace Aurum
 
         while (running_)
         {
-            // Process Win32 messages (returns false if WM_QUIT received)
             if (!window_->ProcessMessages())
-            {
-                running_ = false;
                 break;
-            }
 
-            // Update delta time
-            double deltaTime = timer_.Tick();
+            // ---- Update Timming ---
+            timeSystem_.Tick();
+            float dt = static_cast<float>(timeSystem_.GetDeltaTime());
 
-            // User-defined update callback
-            OnUpdate(static_cast<float>(deltaTime));
+            // ----- Game/Engine Update ----
+            OnUpdate(dt);
 
-            // Example: Rendering workflow
-            renderer_->Clear(0.05f, 0.05f, 0.25f);
+            // ----- Rendering ----
+            renderer_->Clear(0.1f, 0.1f, 0.3f);
             renderer_->Present();
+
+            // --- Debug Logging ----
+            Logger::Get().Log(
+                "Δt: " + std::to_string(dt) +
+                "s | FPS: " + std::to_string(timeSystem_.GetFPS()),
+                LogLevel::Debug
+    
+            );
         }
 
         Shutdown();

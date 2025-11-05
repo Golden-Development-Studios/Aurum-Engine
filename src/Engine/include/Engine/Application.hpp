@@ -7,6 +7,8 @@
 #include <Engine/Renderer.hpp>
 #include <Engine/EventDispatcher.hpp>
 #include <Engine/Input.hpp>
+#include <Engine/TimeSystem.hpp>
+
 
 namespace Aurum
 {
@@ -21,12 +23,15 @@ namespace Aurum
         // Accessors
         EventDispatcher& GetEventDispatcher() { return eventDispatcher_; }
         InputManager& GetInputManager() { return input_; }
+        TimeSystem& GetTimeSystem() { return timeSystem_; }
 
     protected:
         // Lifecycle methods for derived applications
         virtual void OnInitialize() {}
         virtual void OnUpdate(float deltaTime) {}
         virtual void OnShutdown() {}
+
+        TimeSystem timeSystem_;
 
     private:
         bool running_ = true;

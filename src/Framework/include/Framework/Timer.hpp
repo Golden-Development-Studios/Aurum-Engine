@@ -64,17 +64,36 @@ namespace Aurum
     // ---------------------------------------
     // Frame Timer: tracks delta per frame
     // ---------------------------------------
-    class FrameTimer
+ class FrameTimer
     {
     public:
-        FrameTimer() { last_ = Clock::now(); }
+        using Clock = std::chrono::high_resolution_clock;
+        using TimePoint = std::chrono::time_point<Clock>;
 
+        FrameTimer()
+            : last_(Clock::now())
+        {}
+
+        // Returns delta time (seconds) since last call and resets the timer
         double Tick()
         {
             auto now = Clock::now();
             double delta = std::chrono::duration<double>(now - last_).count();
             last_ = now;
             return delta;
+        }
+
+        // Returns elapsed time (seconds) since last reset, but DOES NOT reset the timer
+        double ElapsedSeconds() const
+        {
+            auto now = Clock::now();
+            return std::chrono::duration<double>(now - last_).count();
+        }
+
+        // Optionally, reset manually (if you need to restart timing)
+        void Reset()
+        {
+            last_ = Clock::now();
         }
 
     private:
