@@ -3,8 +3,10 @@
 add_library(AurumEngine STATIC
     src/Renderer.cpp
     src/Window.cpp
+    src/Application.cpp
     include/Engine/Renderer.hpp
     include/Engine/Window.hpp
+    include/Engine/Application.hpp
 )
 
 # --- Include Directories ---
