@@ -3,6 +3,7 @@
 #include <Engine/Application.hpp>
 #include <Engine/EventDispatcher.hpp>
 #include <Engine/Event.hpp>
+#include <Engine/DebugOverlay.hpp>
 
 class SandboxApp : public Aurum::Application
 {
@@ -18,7 +19,7 @@ protected:
         auto& dispatcher = GetEventDispatcher();
 
         // --------------------------------------------
-        // Subscribe to window events
+        // Subscribe to window resize events
         // --------------------------------------------
         dispatcher.Subscribe<Aurum::WindowResizeEvent>(
             [](const Aurum::WindowResizeEvent& e)
@@ -45,6 +46,11 @@ protected:
         );
 
         // --------------------------------------------
+        // Initialize Debug Overlay
+        // --------------------------------------------
+        overlay_.Initialize();
+
+        // --------------------------------------------
         // Simulate event publication (for testing)
         // --------------------------------------------
         dispatcher.Publish(Aurum::WindowResizeEvent(1920, 1080));
@@ -52,13 +58,24 @@ protected:
 
     void OnUpdate(float dt) override
     {
-        Aurum::Logger::Get().Log("Frame delta: " + std::to_string(dt), Aurum::LogLevel::Debug);
+        // ✅ Update Debug Overlay
+        overlay_.Update(timeSystem_, runtimeConfig_.ShouldShowFPS());
+
+        // Optionally: debug timing info
+        Aurum::Logger::Get().Log(
+            "Frame Δt: " + std::to_string(dt) + "s",
+            Aurum::LogLevel::Debug
+        );
     }
 
     void OnShutdown() override
     {
+        overlay_.Shutdown();
         Aurum::Logger::Get().Log("SandboxApp shutting down.", Aurum::LogLevel::Info);
     }
+
+private:
+    Aurum::DebugOverlay overlay_;
 };
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int)
