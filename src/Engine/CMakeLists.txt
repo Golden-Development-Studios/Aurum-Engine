@@ -9,6 +9,7 @@ add_library(AurumEngine STATIC
     src/EventDispatcher.cpp
     src/Input.cpp
     src/TimeSystem.cpp
+    src/EngineRuntimeConfig.cpp
 
     # --- Header Files ---
     include/Engine/Renderer.hpp
@@ -19,6 +20,7 @@ add_library(AurumEngine STATIC
     include/Engine/Input.hpp
     include/Engine/InputCodes.hpp
     include/Engine/TimeSystem.hpp
+    include/Engine/EngineRuntimeConfig.hpp
 )
 
 # --- Include Directories ---
@@ -58,6 +60,8 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     src/Event.cpp
     src/EventDispatcher.cpp
     src/Input.cpp
+    src/TimeSystem.cpp
+    src/EngineRuntimeConfig.cpp
     include/Engine/Renderer.hpp
     include/Engine/Window.hpp
     include/Engine/Application.hpp
@@ -65,4 +69,6 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     include/Engine/EventDispatcher.hpp
     include/Engine/Input.hpp
     include/Engine/InputCodes.hpp
+    include/Engine/TimeSystem.hpp
+    include/Engine/EngineRuntimeConfig.hpp
 )
