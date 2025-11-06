@@ -13,6 +13,7 @@ add_library(AurumEngine STATIC
     src/Input.cpp
     src/TimeSystem.cpp
     src/EngineRuntimeConfig.cpp
+    src/DebugOverlay.cpp
 
     # --- Header Files ---
     include/Engine/Renderer.hpp
@@ -24,6 +25,7 @@ add_library(AurumEngine STATIC
     include/Engine/InputCodes.hpp
     include/Engine/TimeSystem.hpp
     include/Engine/EngineRuntimeConfig.hpp
+    include/Engine/DebugOverlay.hpp
 )
 
 # ============================================================
@@ -89,6 +91,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     src/Input.cpp
     src/TimeSystem.cpp
     src/EngineRuntimeConfig.cpp
+    src/DebugOverlay.cpp
     include/Engine/Renderer.hpp
     include/Engine/Window.hpp
     include/Engine/Application.hpp
@@ -98,4 +101,5 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     include/Engine/InputCodes.hpp
     include/Engine/TimeSystem.hpp
     include/Engine/EngineRuntimeConfig.hpp
+    include/Engine/DebugOverlay.hpp
 )
