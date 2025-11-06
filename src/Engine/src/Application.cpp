@@ -19,17 +19,35 @@ namespace Aurum
     {
         Logger::Get().Log("Initializing Application...", LogLevel::Info);
 
-        window_ = std::make_unique<Window>(hInstance_, 1280, 720, L"Aurum Sandbox");
+        // --- Load runtime configuration ---
+        runtimeConfig_.Load("config/engine_runtime.json");
+
+        // --- Initialize time system with configured target FPS ---
+        timeSystem_.Initialize(runtimeConfig_.GetTargetFPS());
+
+        // --- Create the main application window ---
+        window_ = std::make_unique<Window>(
+            hInstance_,
+            runtimeConfig_.GetWidth(),
+            runtimeConfig_.GetHeight(),
+            L"Aurum Engine Sandbox"
+        );
+
+        // --- Create the renderer ---
         renderer_ = std::make_unique<Renderer>(window_->GetHandle());
 
-        // ✅ Attach this Application instance to the window for message forwarding
+        // --- Attach this Application instance to the window for message forwarding ---
         SetWindowLongPtr(window_->GetHandle(), GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 
-        // Example: publish a window resize event (simulated)
-        eventDispatcher_.Publish(WindowResizeEvent(1280, 720));
+        // --- Dispatch a resize event to start things properly ---
+        eventDispatcher_.Publish(WindowResizeEvent(
+            runtimeConfig_.GetWidth(),
+            runtimeConfig_.GetHeight()
+        ));
 
         OnInitialize();
     }
+
 
     void Application::Shutdown()
     {

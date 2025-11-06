@@ -50,6 +50,10 @@ add_custom_command(TARGET AurumEngine POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${CMAKE_CURRENT_SOURCE_DIR}/include/External/AgilitySDK/bin/x64/d3d12SDKLayers.dll"
         "$<TARGET_FILE_DIR:AurumEngine>"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/../../Sandbox/config"
+        "$<TARGET_FILE_DIR:AurumSandbox>/config"
+    COMMENT "Copying Sandbox runtime configuration files..."
 )
 
 # --- IDE Source Grouping (Optional but Helpful) ---

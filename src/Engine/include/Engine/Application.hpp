@@ -8,6 +8,7 @@
 #include <Engine/EventDispatcher.hpp>
 #include <Engine/Input.hpp>
 #include <Engine/TimeSystem.hpp>
+#include <Engine/EngineRuntimeConfig.hpp>
 
 
 namespace Aurum
@@ -32,6 +33,7 @@ namespace Aurum
         virtual void OnShutdown() {}
 
         TimeSystem timeSystem_;
+        EngineRuntimeConfig runtimeConfig_;
 
     private:
         bool running_ = true;
