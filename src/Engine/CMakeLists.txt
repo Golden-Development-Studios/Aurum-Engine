@@ -15,23 +15,23 @@ add_library(AurumEngine STATIC
     src/EngineRuntimeConfig.cpp
     src/DebugOverlay.cpp
 
-    # --- New DX12 Rendering Backend ---
-    src/engine/render/dx12/D3D12Context.cpp
+    # --- DirectX 12 Rendering Backend ---
+    render/dx12/D3D12Context.cpp
 
     # --- Header Files ---
-    include/Engine/Renderer.hpp
-    include/Engine/Window.hpp
-    include/Engine/Application.hpp
-    include/Engine/Event.hpp
-    include/Engine/EventDispatcher.hpp
-    include/Engine/Input.hpp
-    include/Engine/InputCodes.hpp
-    include/Engine/TimeSystem.hpp
-    include/Engine/EngineRuntimeConfig.hpp
-    include/Engine/DebugOverlay.hpp
+    include/engine/Renderer.hpp
+    include/engine/Window.hpp
+    include/engine/Application.hpp
+    include/engine/Event.hpp
+    include/engine/EventDispatcher.hpp
+    include/engine/Input.hpp
+    include/engine/InputCodes.hpp
+    include/engine/TimeSystem.hpp
+    include/engine/EngineRuntimeConfig.hpp
+    include/engine/DebugOverlay.hpp
 
-    # --- New DX12 Rendering Header ---
-    src/engine/render/dx12/D3D12Context.hpp
+    # --- DX12 Context Header ---
+    render/dx12/D3D12Context.hpp
 )
 
 # ============================================================
@@ -50,7 +50,8 @@ endif()
 target_include_directories(AurumEngine
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/Engine/DirectX-Headers/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/engine
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/DirectX-Headers/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/External/AgilitySDK/directx
 )
 
@@ -60,9 +61,9 @@ target_include_directories(AurumEngine
 target_link_libraries(AurumEngine
     PUBLIC
         AurumFramework
-        d3d12.lib
-        dxgi.lib
-        dxguid.lib
+        d3d12
+        dxgi
+        dxguid
 )
 
 # ============================================================
@@ -108,16 +109,16 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     src/TimeSystem.cpp
     src/EngineRuntimeConfig.cpp
     src/DebugOverlay.cpp
-    src/engine/render/dx12/D3D12Context.cpp
-    include/Engine/Renderer.hpp
-    include/Engine/Window.hpp
-    include/Engine/Application.hpp
-    include/Engine/Event.hpp
-    include/Engine/EventDispatcher.hpp
-    include/Engine/Input.hpp
-    include/Engine/InputCodes.hpp
-    include/Engine/TimeSystem.hpp
-    include/Engine/EngineRuntimeConfig.hpp
-    include/Engine/DebugOverlay.hpp
-    src/engine/render/dx12/D3D12Context.hpp
+    render/dx12/D3D12Context.cpp
+    include/engine/Renderer.hpp
+    include/engine/Window.hpp
+    include/engine/Application.hpp
+    include/engine/Event.hpp
+    include/engine/EventDispatcher.hpp
+    include/engine/Input.hpp
+    include/engine/InputCodes.hpp
+    include/engine/TimeSystem.hpp
+    include/engine/EngineRuntimeConfig.hpp
+    include/engine/DebugOverlay.hpp
+    render/dx12/D3D12Context.hpp
 )
