@@ -1,24 +1,32 @@
 #pragma once
 
+// ============================================================
 // Aurum Engine - D3D12 Context
-// Creates DXGI factory, selects a hardware adapter, and initializes an ID3D12Device.
+// Initializes DXGI factory, selects a hardware adapter, and 
+// creates an ID3D12Device with optional debug layer support.
+// ============================================================
 
+// Ensure Windows headers are lean and clean
 #ifndef NOMINMAX
-#define NOMINMAX
+    #define NOMINMAX
 #endif
 
 #ifndef WIN32_LEAN_AND_MEAN
     #define WIN32_LEAN_AND_MEAN
 #endif
+
 #include <Windows.h>
+#include <wrl.h>
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <dxgidebug.h>
-#include <wrl.h>
 #include <string>
 #include <vector>
 #include <cstdint>
 #include <iostream>
+
+#include <Framework/Logger.hpp>  // ensure logging is available
+
 
 namespace Aurum::Render::DX12
 {
