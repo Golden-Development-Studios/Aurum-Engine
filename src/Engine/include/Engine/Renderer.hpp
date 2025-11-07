@@ -4,7 +4,7 @@
 #include <wrl.h>
 #include <Windows.h>
 #include <Framework/Logger.hpp>
-#include "render/dx12/D3D12Context.hpp"
+#include "../../render/dx12/D3D12Context.hpp"
 
 using Microsoft::WRL::ComPtr;
 

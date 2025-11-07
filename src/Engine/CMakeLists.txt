@@ -51,7 +51,6 @@ target_include_directories(AurumEngine
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/engine
-        ${CMAKE_CURRENT_SOURCE_DIR}/render
         ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/DirectX-Headers/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/External/AgilitySDK/directx
 )
