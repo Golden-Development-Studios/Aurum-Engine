@@ -15,6 +15,9 @@ add_library(AurumEngine STATIC
     src/EngineRuntimeConfig.cpp
     src/DebugOverlay.cpp
 
+    # --- New DX12 Rendering Backend ---
+    src/engine/render/dx12/D3D12Context.cpp
+
     # --- Header Files ---
     include/Engine/Renderer.hpp
     include/Engine/Window.hpp
@@ -26,7 +29,20 @@ add_library(AurumEngine STATIC
     include/Engine/TimeSystem.hpp
     include/Engine/EngineRuntimeConfig.hpp
     include/Engine/DebugOverlay.hpp
+
+    # --- New DX12 Rendering Header ---
+    src/engine/render/dx12/D3D12Context.hpp
 )
+
+# ============================================================
+# Windows + DirectX 12 Baseline
+# ============================================================
+if (WIN32)
+    add_definitions(-DUNICODE -D_UNICODE)
+    add_definitions(-DWIN32_LEAN_AND_MEAN -DNOMINMAX)
+    # Require at least Windows 10 (0x0A00)
+    add_compile_definitions(_WIN32_WINNT=0x0A00)
+endif()
 
 # ============================================================
 # Include Directories
@@ -46,6 +62,7 @@ target_link_libraries(AurumEngine
         AurumFramework
         d3d12.lib
         dxgi.lib
+        dxguid.lib
 )
 
 # ============================================================
@@ -70,7 +87,6 @@ add_custom_command(TARGET AurumEngine POST_BUILD
 # ============================================================
 # Post-Build: Copy Sandbox Runtime Config Files
 # ============================================================
-# Use absolute paths to avoid space issues in Windows ("Dev Drive")
 add_custom_command(TARGET AurumEngine POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:AurumSandbox>/config"
     COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -92,6 +108,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     src/TimeSystem.cpp
     src/EngineRuntimeConfig.cpp
     src/DebugOverlay.cpp
+    src/engine/render/dx12/D3D12Context.cpp
     include/Engine/Renderer.hpp
     include/Engine/Window.hpp
     include/Engine/Application.hpp
@@ -102,4 +119,5 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     include/Engine/TimeSystem.hpp
     include/Engine/EngineRuntimeConfig.hpp
     include/Engine/DebugOverlay.hpp
+    src/engine/render/dx12/D3D12Context.hpp
 )
