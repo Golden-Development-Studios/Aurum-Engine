@@ -24,6 +24,8 @@
 #include <vector>
 #include <cstdint>
 #include <iostream>
+#include "D3D12CommandQueue.hpp"
+#include "D3D12Swapchain.hpp"
 
 #include <Framework/Logger.hpp>  // ensure logging is available
 
@@ -59,6 +61,13 @@ namespace Aurum::Render::DX12
         D3D_FEATURE_LEVEL GetFeatureLevel() const { return m_featureLevel; }
         const AdapterInfo& GetAdapterInfo() const { return m_adapterInfo; }
 
+        // ------------------------------------------------------------
+        // Accessors for Stage 3.3
+        // ------------------------------------------------------------
+        Aurum::Render::DX12::D3D12CommandQueue& GetCommandQueue() { return m_commandQueue; }
+        Aurum::Render::DX12::D3D12Swapchain&    GetSwapchain()    { return m_swapchain; }
+        // ------------------------------------------------------------
+
     private:
         bool CreateFactory(bool enableDebug);
         bool PickAdapter();
@@ -78,5 +87,12 @@ namespace Aurum::Render::DX12
 
         D3D_FEATURE_LEVEL m_featureLevel = D3D_FEATURE_LEVEL_11_1;
         AdapterInfo       m_adapterInfo{};
+
+        // ------------------------------------------------------------
+        // Stage 3.3 subsystems
+        // ------------------------------------------------------------
+        Aurum::Render::DX12::D3D12CommandQueue m_commandQueue;
+        Aurum::Render::DX12::D3D12Swapchain    m_swapchain;
+        // ------------------------------------------------------------
     };
 } // namespace Aurum::Render::DX12
