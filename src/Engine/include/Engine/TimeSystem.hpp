@@ -14,7 +14,8 @@ namespace Aurum
               deltaTime_(0.0),
               fps_(0.0),
               targetFrameTime_(0.0),
-              accumulator_(0.0)
+              accumulator_(0.0),
+              totalTime_(0.0) // ✅ initialize
         {}
 
         // Initialize with optional target FPS (0 disables frame limiting)
@@ -28,6 +29,7 @@ namespace Aurum
         {
             double dt = frameTimer_.Tick();
             deltaTime_ = dt;
+            totalTime_ += dt; // ✅ accumulate total elapsed time
             accumulator_ += dt;
             frameCount_++;
 
@@ -58,9 +60,13 @@ namespace Aurum
             }
         }
 
+        // --- Accessors ---
         double GetDeltaTime() const { return deltaTime_; }
         double GetFPS() const { return fps_; }
         double GetTargetFrameTime() const { return targetFrameTime_; }
+
+        // ✅ Added for animated color / global timing
+        double GetTotalTime() const { return totalTime_; }
 
     private:
         FrameTimer frameTimer_;
@@ -69,5 +75,6 @@ namespace Aurum
         double targetFrameTime_;
         double accumulator_;
         unsigned int frameCount_;
+        double totalTime_; // ✅ new field
     };
 }
