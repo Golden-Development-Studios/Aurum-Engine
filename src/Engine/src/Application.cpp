@@ -7,7 +7,8 @@ namespace Aurum
         : hInstance_(hInstance),
           input_(eventDispatcher_) // ✅ Integrate InputManager initialization
     {
-        timeSystem_.Initialize(60.0); // Target 60 FPS Cap
+        timeSystem_.Initialize(60.0); // Default 60 FPS cap
+        running_ = true;
     }
 
     Application::~Application()
@@ -15,6 +16,7 @@ namespace Aurum
         Shutdown();
     }
 
+    // ------------------------------------------------------------
     void Application::Initialize()
     {
         Logger::Get().Log("Initializing Application...", LogLevel::Info);
@@ -39,7 +41,7 @@ namespace Aurum
         // --- Attach this Application instance to the window for message forwarding ---
         SetWindowLongPtr(window_->GetHandle(), GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 
-        // --- Dispatch a resize event to start things properly ---
+        // --- Publish initial resize event ---
         eventDispatcher_.Publish(WindowResizeEvent(
             runtimeConfig_.GetWidth(),
             runtimeConfig_.GetHeight()
@@ -48,11 +50,14 @@ namespace Aurum
         OnInitialize();
     }
 
-
+    // ------------------------------------------------------------
     void Application::Shutdown()
     {
         if (!running_) return;
         running_ = false;
+
+        Logger::Get().Log("Application shutting down...", LogLevel::Info);
+
         OnShutdown();
 
         renderer_.reset();
@@ -61,35 +66,53 @@ namespace Aurum
         Logger::Get().Log("Application shutdown complete.", LogLevel::Info);
     }
 
+    // ------------------------------------------------------------
     void Application::Run()
     {
         Initialize();
         Logger::Get().Log("Application loop starting...", LogLevel::Info);
 
-        timer_.Tick(); // initializes frame timing
+        MSG msg = {};
+        timer_.Tick();    // Prime timer
+        timeSystem_.Tick();
 
         while (running_)
         {
-            if (!window_->ProcessMessages())
-                break;
+            // --- Windows Message Pump ---
+            while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+            {
+                if (msg.message == WM_QUIT)
+                {
+                    Logger::Get().Log("WM_QUIT received — exiting main loop.", LogLevel::Info);
+                    running_ = false;
+                    break;
+                }
 
-            // ---- Update Timming ---
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+
+            if (!running_) break;
+
+            // --- Frame timing ---
             timeSystem_.Tick();
-            float dt = static_cast<float>(timeSystem_.GetDeltaTime());
+            const float dt = static_cast<float>(timeSystem_.GetDeltaTime());
 
-            // ----- Game/Engine Update ----
+            // --- Game / Engine update ---
             OnUpdate(dt);
 
-            // ----- Rendering ----
-            renderer_->Clear(0.1f, 0.1f, 0.3f);
-            renderer_->Present();
+            // --- Rendering ---
+            if (renderer_)
+            {
+                renderer_->Clear(0.1f, 0.1f, 0.3f); // Default clear color
+                renderer_->Present();
+            }
 
-            // --- Debug Logging ----
+            // --- Debug logging ---
             Logger::Get().Log(
                 "Δt: " + std::to_string(dt) +
                 "s | FPS: " + std::to_string(timeSystem_.GetFPS()),
                 LogLevel::Debug
-    
             );
         }
 
