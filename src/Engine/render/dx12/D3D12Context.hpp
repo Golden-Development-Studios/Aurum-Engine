@@ -43,8 +43,12 @@ namespace Aurum::Render::DX12
 
     struct ContextCreateDesc
     {
-        bool enableDebugLayer = false; // Enabled by default in Debug builds via Renderer.
+        bool  enableDebugLayer = false; // Enabled by default in Debug builds via Renderer.
+        HWND  windowHandle     = nullptr; // Window handle for swapchain creation
+        UINT  width            = 1280;    // Initial width
+        UINT  height           = 720;     // Initial height
     };
+
 
     class D3D12Context
     {

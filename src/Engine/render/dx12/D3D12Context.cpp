@@ -68,7 +68,27 @@ bool D3D12Context::Initialize(const ContextCreateDesc& desc)
     if (!CreateDevice())
         return false;
 
+    // ------------------------------------------------------------
+    // Stage 3.3: Initialize subsystems
+    // ------------------------------------------------------------
+
+    // Create Command Queue
+    if (!m_commandQueue.Initialize(m_device.Get()))
+        return false;
+
+    // Create Swapchain (requires factory, device, queue, hwnd, size)
+    if (!m_swapchain.Initialize(
+            m_factory.Get(),
+            m_device.Get(),
+            m_commandQueue.Get(),
+            desc.windowHandle,
+            desc.width,
+            desc.height))
+        return false;
+
+    // ------------------------------------------------------------
     // Summary log
+    // ------------------------------------------------------------
     std::wstring fl = FeatureLevelToString(m_featureLevel);
     std::wstring gpu = m_adapterInfo.description;
     const double vramMB = static_cast<double>(m_adapterInfo.dedicatedVRAMBytes) / (1024.0 * 1024.0);
@@ -79,6 +99,7 @@ bool D3D12Context::Initialize(const ContextCreateDesc& desc)
 
     return true;
 }
+
 
 // ------------------------------------------------------------
 // Create DXGI Factory (with optional debug layer)
