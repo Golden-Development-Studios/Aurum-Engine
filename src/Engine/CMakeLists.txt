@@ -18,6 +18,10 @@ add_library(AurumEngine STATIC
     # --- DirectX 12 Rendering Backend ---
     render/dx12/D3D12Context.cpp
 
+    # --- New DX12 Rendering System Files ---
+    render/dx12/D3D12CommandQueue.cpp
+    render/dx12/D3D12Swapchain.cpp
+
     # --- Header Files ---
     include/engine/Renderer.hpp
     include/engine/Window.hpp
@@ -32,6 +36,10 @@ add_library(AurumEngine STATIC
 
     # --- DX12 Context Header ---
     render/dx12/D3D12Context.hpp
+
+    # --- New DX12 Rendering Headers ---
+    render/dx12/D3D12CommandQueue.hpp
+    render/dx12/D3D12Swapchain.hpp
 )
 
 # ============================================================
@@ -109,7 +117,11 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     src/TimeSystem.cpp
     src/EngineRuntimeConfig.cpp
     src/DebugOverlay.cpp
+
     render/dx12/D3D12Context.cpp
+    render/dx12/D3D12CommandQueue.cpp
+    render/dx12/D3D12Swapchain.cpp
+
     include/engine/Renderer.hpp
     include/engine/Window.hpp
     include/engine/Application.hpp
@@ -120,5 +132,8 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES
     include/engine/TimeSystem.hpp
     include/engine/EngineRuntimeConfig.hpp
     include/engine/DebugOverlay.hpp
+
     render/dx12/D3D12Context.hpp
+    render/dx12/D3D12CommandQueue.hpp
+    render/dx12/D3D12Swapchain.hpp
 )
