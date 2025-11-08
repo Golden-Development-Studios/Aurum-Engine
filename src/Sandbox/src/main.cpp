@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <iostream>
+#include <cmath>   // for sin/cos wave color variation
 #include <Engine/Application.hpp>
 #include <Engine/EventDispatcher.hpp>
 #include <Engine/Event.hpp>
@@ -50,22 +51,33 @@ protected:
         // --------------------------------------------
         overlay_.Initialize();
 
-        // --------------------------------------------
-        // Simulate event publication (for testing)
-        // --------------------------------------------
+        // Simulate initial resize event
         dispatcher.Publish(Aurum::WindowResizeEvent(1920, 1080));
     }
 
     void OnUpdate(float dt) override
     {
-        // ✅ Update Debug Overlay
         overlay_.Update(timeSystem_, runtimeConfig_.ShouldShowFPS());
 
-        // Optionally: debug timing info
-        Aurum::Logger::Get().Log(
-            "Frame Δt: " + std::to_string(dt) + "s",
-            Aurum::LogLevel::Debug
-        );
+        auto* renderer = GetRenderer();
+        if (renderer)
+        {
+            // Animate background color using time-based sin waves
+            double t = timeSystem_.GetTotalTime();
+            float r = static_cast<float>((sin(t) * 0.5) + 0.5);
+            float g = static_cast<float>((sin(t * 0.7) * 0.5) + 0.5);
+            float b = static_cast<float>((sin(t * 1.3) * 0.5) + 0.5);
+
+            renderer->Clear(r * 0.4f, g * 0.4f, b * 0.8f);
+            renderer->Present();
+
+            // --- Optional debug output ---
+            Aurum::Logger::Get().Log(
+                "Δt: " + std::to_string(dt) + "s | RGB(" +
+                std::to_string(r) + ", " + std::to_string(g) + ", " + std::to_string(b) + ")",
+                Aurum::LogLevel::Debug
+            );
+        }
     }
 
     void OnShutdown() override

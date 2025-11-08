@@ -18,6 +18,7 @@ namespace Aurum
 
         void Clear(float r, float g, float b);
         void Present();
+        void RenderFrame(); // ✅ <-- add this line
 
     private:
         void Init(HWND hwnd);

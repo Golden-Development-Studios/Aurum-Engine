@@ -1,5 +1,6 @@
 // --- Aurum Engine DirectX 12 Renderer Implementation ---
-// Stage 3.1 integrated with D3D12Context for device and adapter creation
+// Stage 3.3 – Command Queue & Swapchain Integration
+// Adds RenderFrame() for a full per-frame clear + present cycle
 
 #include <Engine/Renderer.hpp>
 #include <directx/d3dx12.h>
@@ -40,7 +41,6 @@ void Renderer::Init(HWND hwnd)
     }
 
     device_ = dx12Context_.GetDevice();
-
     Logger::Get().Log("DX12 device acquired from context.", LogLevel::Info);
 
     // --- 2. Create command queue ---
@@ -160,6 +160,55 @@ void Renderer::Clear(float r, float g, float b)
     ID3D12CommandList* lists[] = { commandList_.Get() };
     commandQueue_->ExecuteCommandLists(_countof(lists), lists);
 }
+
+// ================================================================
+//  NEW SECTION — Stage 3.3 RenderFrame Integration
+// ================================================================
+void Renderer::RenderFrame()
+{
+    // 1. Reset command allocator & list
+    commandAllocator_->Reset();
+    commandList_->Reset(commandAllocator_.Get(), nullptr);
+
+    // 2. Set current back buffer and RTV
+    CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(
+        rtvHeap_->GetCPUDescriptorHandleForHeapStart(),
+        frameIndex_,
+        rtvDescriptorSize_);
+
+    auto* backBuffer = renderTargets_[frameIndex_].Get();
+
+    // 3. Transition PRESENT → RENDER_TARGET
+    CD3DX12_RESOURCE_BARRIER toRT =
+        CD3DX12_RESOURCE_BARRIER::Transition(
+            backBuffer,
+            D3D12_RESOURCE_STATE_PRESENT,
+            D3D12_RESOURCE_STATE_RENDER_TARGET);
+    commandList_->ResourceBarrier(1, &toRT);
+
+    // 4. Clear color (demo blue)
+    const FLOAT clearColor[4] = { 0.05f, 0.10f, 0.30f, 1.0f };
+    commandList_->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
+    commandList_->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+
+    // 5. Transition RENDER_TARGET → PRESENT
+    CD3DX12_RESOURCE_BARRIER toPresent =
+        CD3DX12_RESOURCE_BARRIER::Transition(
+            backBuffer,
+            D3D12_RESOURCE_STATE_RENDER_TARGET,
+            D3D12_RESOURCE_STATE_PRESENT);
+    commandList_->ResourceBarrier(1, &toPresent);
+
+    // 6. Execute and present
+    commandList_->Close();
+    ID3D12CommandList* lists[] = { commandList_.Get() };
+    commandQueue_->ExecuteCommandLists(_countof(lists), lists);
+
+    swapChain_->Present(1, 0);
+    WaitForGPU();
+    frameIndex_ = swapChain_->GetCurrentBackBufferIndex();
+}
+// ================================================================
 
 void Renderer::Present()
 {

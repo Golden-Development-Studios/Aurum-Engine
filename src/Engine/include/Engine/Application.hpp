@@ -26,6 +26,9 @@ namespace Aurum
         InputManager& GetInputManager() { return input_; }
         TimeSystem& GetTimeSystem() { return timeSystem_; }
 
+        Renderer* GetRenderer() { return renderer_.get(); }
+
+
     protected:
         // Lifecycle methods for derived applications
         virtual void OnInitialize() {}
